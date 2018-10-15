@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Tooltip } from 'antd'
+import { Link } from 'react-router-dom'
 
 const buttonStyle = {
     position: 'fixed',
@@ -9,14 +10,13 @@ const buttonStyle = {
     zIndex: 9
 }
 
-const FloatButton = ({history, label, to, idButton}) => (
+const FloatButton = ({label, to, idButton}) => (
     <Tooltip placement="left" title={label}>
-        <Button id={idButton} style={buttonStyle} className="floatButton" type="primary" icon="plus" onClick={() => to ? history.push(to) : null} size="large" shape="circle" />
+        <Link to={to}><Button id={idButton} style={buttonStyle} className="floatButton" type="primary" icon="plus" size="large" shape="circle" /></Link>
     </Tooltip>
 )
 
 FloatButton.propTypes = {
-    history: PropTypes.object,
     label: PropTypes.string,
     to: PropTypes.string,
     idButton: PropTypes.string.isRequired

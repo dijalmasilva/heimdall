@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import {
     Row,
     Col,
@@ -25,12 +26,12 @@ class ListApis extends Component {
                                 <Card
                                     className="heimdall-card"
                                     title={
-                                        <div style={{paddingLeft: 24, paddingRight: 24, paddingTop: 16, paddingBottom: 16, cursor: 'pointer'}} onClick={this.redirect('/apis/' + api.id)}>
-                                            <span>{api.name}</span>
+                                        <div style={{paddingLeft: 24, paddingRight: 24, paddingTop: 16, paddingBottom: 16, cursor: 'pointer'}}>
+                                            <Link to={'/apis/' + api.id}><span>{api.name}</span></Link>
                                         </div>
                                     }
                                     actions={[
-                                        <Tooltip title="View" onClick={this.redirect('/apis/' + api.id)}><Icon type="search" /></Tooltip>
+                                        <Link to={'/apis/' + api.id}><Tooltip title="View"><Icon type="search" /></Tooltip></Link>
                                     ]}
                                 >
                                     <div className="heimdall-card-body" onClick={this.redirect('/apis/' + api.id)}>

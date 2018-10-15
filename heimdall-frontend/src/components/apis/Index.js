@@ -5,7 +5,8 @@ import ListApis from './ListApis'
 // import FloatButton from '../ui/FloatButton'
 import { Row, Col, Form, Input, Button, Tooltip, notification } from 'antd'
 import { getAllApis } from '../../actions/apis'
-import Loading from '../ui/Loading';
+import Loading from '../ui/Loading'
+import { Link } from 'react-router-dom'
 
 const FormItem = Form.Item
 
@@ -63,7 +64,7 @@ class Index extends Component {
                 {listApi}
 
                 <Tooltip placement="left" title="Add new API">
-                    <Button id="addApi" style={{ position: 'fixed', bottom: '30px', right: '30px', zIndex: 9 }} className="floatButton" type="primary" icon="plus" onClick={() => history.push("/apis/new")} size="large" shape="circle" />
+                    <Link to={"/apis/new"}><Button id="addApi" style={{ position: 'fixed', bottom: '30px', right: '30px', zIndex: 9 }} className="floatButton" type="primary" icon="plus" size="large" shape="circle" /></Link>
                 </Tooltip>
             </div>
         )

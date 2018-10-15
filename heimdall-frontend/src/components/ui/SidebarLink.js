@@ -1,16 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon } from 'antd'
+import { Link } from 'react-router-dom';
 
-const SidebarLink = ({history, label, to, icon, id}) => (
-    <a onClick={() => history.push(to)}>
+const SidebarLink = ({label, to, icon, id}) => (
+    <Link to={to}>
         {icon ? (<Icon type={icon} />) : null}
         <span id={id} className="nav-text">{label}</span>
-    </a>
+    </Link>
+    // <a onClick={() => history.push(to)} href={to}>
+    //     {icon ? (<Icon type={icon} />) : null}
+    //     <span id={id} className="nav-text">{label}</span>
+    // </a>
 )
 
 SidebarLink.propTypes = {
-    history: PropTypes.object.isRequired,
     label: PropTypes.string,
     to: PropTypes.string,
     icon: PropTypes.string
