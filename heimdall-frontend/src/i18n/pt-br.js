@@ -306,5 +306,6 @@ export default {
         'ignored_headers': 'Cabeçalhos ignorados',
         'param_name': 'Nome do parâmetro',
         'param_value': 'Valor do parâmetro',
+        'add_new_param': 'Adicionar novo paramêtro'
     }
 }
