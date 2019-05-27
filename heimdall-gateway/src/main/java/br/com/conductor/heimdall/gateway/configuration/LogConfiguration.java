@@ -26,6 +26,7 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
+import io.logz.logback.LogzioLogbackAppender;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
 import org.slf4j.LoggerFactory;
@@ -106,6 +107,33 @@ public class LogConfiguration {
 			logger.addAppender(appender);
 
 		}
+
+		if (property.getLogz().isEnabled()) {
+
+			final Property.Logz logz = property.getLogz();
+
+			Logger logger = (Logger) LoggerFactory.getLogger("logz");
+			logger.setAdditive(false);
+
+			LogzioLogbackAppender appender = new LogzioLogbackAppender();
+			appender.setName("Logz");
+			appender.setLogzioType(logz.getType());
+			appender.setLogzioUrl(logz.getUrl());
+			appender.setToken(logz.getToken());
+			appender.setContext(lc);
+			appender.start();
+
+			AsyncAppender asyncAppender = new AsyncAppender();
+			asyncAppender.setQueueSize(DEFAULT_QUEUE_SIZE);
+
+			asyncAppender.addAppender(appender);
+			asyncAppender.setContext(lc);
+			asyncAppender.start();
+
+			logger.addAppender(appender);
+		}
+
 	}
 
 }
+

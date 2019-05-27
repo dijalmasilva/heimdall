@@ -13,8 +13,13 @@ heimdall:
     hostname: hostname
     excludeRabbit: true
     retryable: false
-    logstash:
+    logz:
         enabled: true
+        token: token
+        type: java
+        url: https://listener.logz.io:8071
+    logstash:
+        enabled: false
         destination: 127.0.0.1
     rewrite:
         enable: false

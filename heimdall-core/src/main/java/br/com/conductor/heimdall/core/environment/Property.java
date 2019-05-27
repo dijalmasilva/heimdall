@@ -183,4 +183,14 @@ public class Property {
     	private int delayTimeSeconds = 30;
      }
 
+     private Logz logz = new Logz();
+
+     @Data
+     public class Logz {
+
+          private boolean enabled = false;
+          private String token = "token";
+          private String type = "type";
+          private String url = "http://listener.logz.io:8071";
+     }
 }

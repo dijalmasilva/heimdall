@@ -49,7 +49,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author Filipe Germano
  * @author Thiago Sampaio
- *
+ * @author <a href="https://dijalmasilva.github.io" target="_blank">Dijalma Silva</a>
  */
 
 @Component
@@ -83,7 +83,7 @@ public class TraceFilter implements Filter {
 		try {
 
 			trace = TraceContextHolder.getInstance().init(prop.getTrace().isPrintAllTrace(), profile, request,
-			prop.getMongo().getEnabled(), prop.getLogstash().getEnabled(), buildProperties.getVersion());
+			prop.getMongo().getEnabled(), prop.getLogstash().getEnabled(), prop.getLogz().isEnabled(), buildProperties.getVersion());
 			if (shouldDisableTrace(request)) {
 				trace.setShouldPrint(false);
 			}

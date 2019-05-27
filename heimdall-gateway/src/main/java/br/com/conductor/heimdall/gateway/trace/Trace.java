@@ -49,7 +49,7 @@ import static net.logstash.logback.marker.Markers.append;
  * Represents the trace message.
  *
  * @author Thiago Sampaio
- *
+ * @author <a href="https://dijalmasilva.github.io" target="_blank">Dijalma Silva</a>
  */
 @Data
 @Slf4j
@@ -58,6 +58,8 @@ public class Trace {
 	 private static final Logger logMongo = LoggerFactory.getLogger("mongo");
 	 
 	 private static final Logger logstash = LoggerFactory.getLogger("logstash");
+
+	 private static final Logger logz = LoggerFactory.getLogger("logz");
 
      private String method;
 
@@ -121,6 +123,9 @@ public class Trace {
      @JsonIgnore
      private boolean printLogstash;
 
+     @JsonIgnore
+     private boolean printLogz;
+
      private String version;
      
      public Trace() {
@@ -135,13 +140,14 @@ public class Trace {
       * @param printMongo
       * @param printLogstash
       */
-     public Trace(boolean printAllTrace, String profile, ServletRequest servletRequest, boolean printMongo, boolean printLogstash){
+     public Trace(boolean printAllTrace, String profile, ServletRequest servletRequest, boolean printMongo, boolean printLogstash, boolean printLogz){
 
           this.shouldPrint = true;
           this.profile = profile;
           this.printAllTrace = printAllTrace;
           this.printMongo = printMongo;
           this.printLogstash = printLogstash;
+          this.printLogz = printLogz;
           HttpServletRequest request = (HttpServletRequest) servletRequest;
           HeimdallException.checkThrow(request == null, ExceptionMessage.GLOBAL_REQUEST_NOT_FOUND);
 
@@ -174,8 +180,8 @@ public class Trace {
       * @param printLogstash
       * @param version
       */
-     public Trace(boolean printAllTrace, String profile, ServletRequest servletRequest, boolean printMongo, boolean printLogstash, String version) {
-    	 this(printAllTrace, profile, servletRequest, printMongo, printLogstash);
+     public Trace(boolean printAllTrace, String profile, ServletRequest servletRequest, boolean printMongo, boolean printLogstash, boolean printLogz, String version) {
+    	 this(printAllTrace, profile, servletRequest, printMongo, printLogstash, printLogz);
     	 this.version = version;
      }
 
@@ -286,6 +292,10 @@ public class Trace {
 
           if (printLogstash) {
         	  printInLogger(logstash, statusCode);
+          }
+
+          if (printLogz) {
+              printInLogger(logz, statusCode);
           }
      }
 
